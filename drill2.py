@@ -15,7 +15,7 @@ class State(Enum):
 x = 400
 y = 90
 
-speed = 20
+speed = 10
 move_diff = 0
 
 mid_X = 400
@@ -62,7 +62,7 @@ def Move_Circle():
     global state
 
     angle += 0.1
-    print(math.degrees(angle))
+    #print(math.degrees(angle))
     x = mid_X + r * math.cos(angle)
     y = mid_Y + r * math.sin(angle)
     if math.degrees(angle) >= 360 - 90:
