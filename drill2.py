@@ -62,7 +62,7 @@ def Move_Circle():
     global state
 
     angle -= 0.1
-    print(math.degrees(angle))
+    #print(math.degrees(angle))
     x = mid_X + r * math.cos(angle)
     y = mid_Y + r * math.sin(angle)
     if math.degrees(angle) <= -360 -90:
