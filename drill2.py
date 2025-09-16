@@ -2,7 +2,11 @@ from pico2d import *
 from enum import Enum
 import math
 
+from pico2d import close_canvas
+from sdl2.examples.gfxdrawing import draw_circles
+
 open_canvas(800,800)
+
 grass = load_image('grass.png')
 character = load_image('character.png')
 
@@ -15,7 +19,8 @@ class State(Enum):
 x = 400
 y = 90
 
-speed = 20
+
+speed = 5
 move_diff = 0
 
 mid_X = 400
@@ -25,8 +30,10 @@ angle = math.atan2( y - mid_Y, x - mid_X)
 
 r = math.sqrt((mid_X - x) ** 2 + (mid_Y - y) ** 2) # 반지름
 
+
 state = State.RECT
 direction = Direction.RIGHT
+
 
 def Move_Rectangle():
     global direction
@@ -61,21 +68,22 @@ def Move_Circle():
     global r
     global state
 
-    angle -= 0.1
+    angle -= 0.05
     #print(math.degrees(angle))
     x = mid_X + r * math.cos(angle)
     y = mid_Y + r * math.sin(angle)
-    if math.degrees(angle) <= -360 -90:
+    if math.degrees(angle) <= -360 - 90:
         angle = math.atan2( y - mid_Y, x - mid_X)
         state = State.RECT
 
 
+#
 while (True):
     #게임 렌더링
     clear_canvas()
-    grass.draw(400, 30)
-    character.draw(x, y)
-    update_canvas()
+    grass.draw_now(400, 30)
+    character.draw_now(x, y)
+
     if(state == State.RECT):
         Move_Rectangle()
         if(move_diff >= 3000):
@@ -87,5 +95,4 @@ while (True):
     delay(0.01)
 
 
-#게임 종료
 close_canvas()
